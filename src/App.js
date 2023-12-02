@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './app.css';
 
 
@@ -10,7 +10,11 @@ function App() {
   const [hemisphere, setHemisphere] = useState("");
   const [month, setMonth] = useState(new Date().getMonth());
 
-  
+  useEffect(() => {
+    getLocation();
+    const date = new Date();
+    setMonth(date.getMonth());
+  }, [])
 
 
   function getLocation() {
@@ -42,7 +46,7 @@ function App() {
 
   return (
     <div>
-      <button onClick={getLocation}>get location</button>
+      {/* <button onClick={getLocation}>get location</button> */}
       {
         (hemisphere === "Northern Hemisphere" && (month >= 2 && month <= 9)) || 
         (hemisphere === "Southern Hemisphere" && (month < 2 || month > 9))? (
